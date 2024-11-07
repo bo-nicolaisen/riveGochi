@@ -1,1 +1,2 @@
-// write cool JS hwere!!
+
+let myGochi = new Gochi();
