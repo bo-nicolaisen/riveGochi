@@ -40,7 +40,7 @@ class Gochi {
         this.RiveScene = new rive.Rive({
             src: "./assets/rive/gochi2.riv",
             canvas: document.getElementById("canvas"),
-            //artboard: "board",
+            artboard: "board",
             autoplay: true,
             stateMachines: "gochiState",
             onLoad: () => {
