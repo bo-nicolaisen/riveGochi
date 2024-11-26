@@ -100,7 +100,8 @@ class Gochi {
         });
 
         menu.appendChild(button);
-        document.body.appendChild(menu);
+
+        document.getElementById('app').appendChild(menu);
     }
 
     feedGochi() {

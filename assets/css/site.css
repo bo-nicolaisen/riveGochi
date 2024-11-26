@@ -132,11 +132,27 @@ table {
 
 #app {
   position: relative;
+  width: 390px;
+  height: 844px;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 #menuBar {
-  display: block;
+  display: inline-block;
   position: absolute;
   bottom: 0px;
   cursor: pointer;
+}
+
+button {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px;
 }
