@@ -1,6 +1,5 @@
 
 class Gochi {
-
     #sad;
     #happy;
     #mid;
@@ -35,16 +34,19 @@ class Gochi {
             }
         }
 
-        console.log(this.#gochiData);
+
 
         // setup rive scene
         this.RiveScene = new rive.Rive({
-            src: "./assets/rive/gochi.riv",
+            src: "./assets/rive/gochi2.riv",
             canvas: document.getElementById("canvas"),
+            //artboard: "board",
             autoplay: true,
             stateMachines: "gochiState",
             onLoad: () => {
                 this.RiveScene.resizeDrawingSurfaceToCanvas();
+                console.log("My design-time text is, ", this.RiveScene.getTextRunValue("test"));
+                this.RiveScene.setTextRunValue("test", "new Gochi");
 
                 this.initGochi()
 
@@ -77,14 +79,19 @@ class Gochi {
     }
 
     createControls() {
+
+        let menu = document.createElement('section');
+        menu.id = 'menuBar';
+
         let playButton = document.createElement('button');
         playButton.innerHTML = 'Play';
         playButton.addEventListener('click', () => {
+            console.log('play');
 
             this.playGochi()
         });
 
-        document.body.appendChild(playButton);
+        menu.appendChild(playButton);
 
         let button = document.createElement('button');
         button.innerHTML = 'feed';
@@ -92,7 +99,8 @@ class Gochi {
             this.feedGochi();
         });
 
-        document.body.appendChild(button);
+        menu.appendChild(button);
+        document.body.appendChild(menu);
     }
 
     feedGochi() {
@@ -108,10 +116,17 @@ class Gochi {
     }
 
     playGochi() {
-        if (this.#gochiData.bored >= 3 || this.gochiState !== 'happy') {
+        console.log(this.gochiState);
+
+
+        if (this.gochiState !== 'happy') {
             return;
         }
 
+        /*  if (this.#gochiData.bored >= 3 || this.gochiState !== 'happy') {
+             return;
+         } */
+        console.log('play call');
         this.#play.fire()
         this.#gochiData.lastPlay.timeStamp = new Date().getTime();
         this.#gochiData.bored -= 1;
@@ -119,15 +134,18 @@ class Gochi {
     }
 
     upDate() {
+        // console.log(this.#gochiData.bored);
+
+
         if (this.gochiState == 'dead') {
         } else {
             this.currentTimeStamp = new Date().getTime();
-            console.log(this.gochiState);
+            //console.log(this.gochiState);
 
             if (this.currentTimeStamp - this.#gochiData.lastFeed.timeStamp > 1500) {
 
                 this.#gochiData.hunger += 0.1;
-                console.log('hunger level: ' + this.#gochiData.hunger);
+                // console.log('hunger level: ' + this.#gochiData.hunger);
             }
 
 
