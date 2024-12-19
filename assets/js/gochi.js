@@ -34,8 +34,6 @@ class Gochi {
             }
         }
 
-
-
         // setup rive scene
         this.RiveScene = new rive.Rive({
             src: "./assets/rive/gochi2.riv",
@@ -44,9 +42,9 @@ class Gochi {
             autoplay: true,
             stateMachines: "gochiState",
             onLoad: () => {
+
                 this.RiveScene.resizeDrawingSurfaceToCanvas();
-                console.log("My design-time text is, ", this.RiveScene.getTextRunValue("test"));
-                this.RiveScene.setTextRunValue("test", "new Gochi");
+                this.RiveScene.setTextRunValue("test", "RiveGochi");
 
                 this.initGochi()
 
@@ -66,9 +64,6 @@ class Gochi {
         this.#sad = inputs.find(i => i.name === 'sad')
         this.#happy = inputs.find(i => i.name === 'happy')
         this.#mid = inputs.find(i => i.name === 'mid')
-
-
-        //this.RiveScene.on('statechange', this.stateChangeHandler);
 
         this.createControls()
         console.log(this.#gochiData);
@@ -124,9 +119,7 @@ class Gochi {
             return;
         }
 
-        /*  if (this.#gochiData.bored >= 3 || this.gochiState !== 'happy') {
-             return;
-         } */
+
         console.log('play call');
         this.#play.fire()
         this.#gochiData.lastPlay.timeStamp = new Date().getTime();
@@ -136,8 +129,6 @@ class Gochi {
 
     upDate() {
         // console.log(this.#gochiData.bored);
-
-
         if (this.gochiState == 'dead') {
         } else {
             this.currentTimeStamp = new Date().getTime();
@@ -148,7 +139,6 @@ class Gochi {
                 this.#gochiData.hunger += 0.1;
                 // console.log('hunger level: ' + this.#gochiData.hunger);
             }
-
 
             if (this.currentTimeStamp - this.#gochiData.lastPlay.timeStamp > 10) {
                 this.#gochiData.bored += 0.1;
@@ -166,10 +156,9 @@ class Gochi {
             if (this.#gochiData.hunger > 2 && this.gochiState !== 'sad') {
                 console.log('sad');
 
-                this.gochiState = 'sad';
+                this.gochiState = 'sad';cd nodeserver
                 this.#sad.fire();
             }
-
 
             if (this.#gochiData.hunger > 1 && this.#gochiData.hunger < 2 && this.gochiState !== 'mid') {
                 this.gochiState = 'mid';
@@ -179,12 +168,10 @@ class Gochi {
             if (this.#gochiData.hunger > 3) {
                 this.gochiState = 'dead';
                 this.die()
-
             }
         }
 
     }
-
 
     die() {
 
@@ -192,9 +179,6 @@ class Gochi {
         this.#gochiData = null
         this.SaveLocalStorageData(this.#gochiData);
     }
-
-
-
 
 
     SaveLocalStorageData(myData) {
@@ -213,11 +197,6 @@ class Gochi {
 }
 
 
-
-
-
-
-
 /* "load", // When Rive has successfully loaded in the Rive file
     "loaderror", // When Rive cannot load the Rive file
     "play", // When Rive plays an entity or resumes the render loop
@@ -228,15 +207,5 @@ class Gochi {
     "statechange", // When a Rive state change is detected
     "riveevent", // When a Rive Event gets reported */
 
-
-
-/* const intervalID = setInterval(myCallback, 500, "Parameter 1", "Parameter 2");
-
-function myCallback(a, b) {
-    // Your code here
-    // Parameters are purely optional.
-    console.log(a);
-    console.log(b);
-} */
 
 
