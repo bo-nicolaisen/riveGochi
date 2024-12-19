@@ -1,4 +1,10 @@
 
+export default function newGochi() {
+
+    return new Gochi();
+}
+
+
 class Gochi {
     #sad;
     #happy;
@@ -65,7 +71,7 @@ class Gochi {
         this.#happy = inputs.find(i => i.name === 'happy')
         this.#mid = inputs.find(i => i.name === 'mid')
 
-        this.createControls()
+        //this.createControls()
         console.log(this.#gochiData);
 
         this.gameLoop = setInterval(this.upDate.bind(this), 1000);
@@ -73,42 +79,10 @@ class Gochi {
 
     }
 
-    createControls() {
-
-        let menu = document.createElement('section');
-        menu.id = 'menuBar';
-
-        let playButton = document.createElement('button');
-        playButton.innerHTML = 'Play';
-        playButton.addEventListener('click', () => {
-            console.log('play');
-
-            this.playGochi()
-        });
-
-        menu.appendChild(playButton);
-
-        let button = document.createElement('button');
-        button.innerHTML = 'feed';
-        button.addEventListener('click', () => {
-            this.feedGochi();
-        });
-
-        menu.appendChild(button);
-
-        document.getElementById('app').appendChild(menu);
-    }
 
     feedGochi() {
 
-        if (this.#gochiData.hunger <= 0) {
-            return;
-        }
-
         this.#eat.fire()
-        this.#gochiData.hunger -= 1;
-        this.#gochiData.lastFeed.timeStamp = new Date().getTime();
-        this.SaveLocalStorageData(this.#gochiData);
     }
 
     playGochi() {
@@ -156,7 +130,7 @@ class Gochi {
             if (this.#gochiData.hunger > 2 && this.gochiState !== 'sad') {
                 console.log('sad');
 
-                this.gochiState = 'sad';cd nodeserver
+                this.gochiState = 'sad';
                 this.#sad.fire();
             }
 
